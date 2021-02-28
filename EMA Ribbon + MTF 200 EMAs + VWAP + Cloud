@@ -1,8 +1,5 @@
-// Title
+// EMA RIBBON
 study(title = "EMA Ribbon + VWAP + MTF", shorttitle="EMAs + VWAP + Cloud", overlay=true)
-
-/// EMA RIBBON
-// <-- these are hidden lines
 
 src1 = close, len1 = input(08, minval=1, title="EMA Length")
 src2 = close, len2 = input(14, minval=1, title="EMA Length")
@@ -40,6 +37,8 @@ plot_color8 = ema8 >= ema8[2]  ? #4985E7 : ema8 < ema8[2] ? #4985E6 : na
 
 plot_color0 = ema0 >= ema0[2]  ? lime: ema0 < ema0[2] ? red : na
 
+
+
 plot(ema1, title="EMA Plot", style=line, linewidth=1, color = plot_color1)
 plot(ema2, title="EMA Plot", style=line, linewidth=1, color = plot_color2)
 plot(ema3, title="EMA Plot", style=line, linewidth=1, color = plot_color3)
@@ -53,8 +52,14 @@ plot(ema0, title="EMA Plot", style=line, linewidth=3, color = plot_color0)
 
 
 
-/// VWAP + EMA
 
+
+
+
+
+
+
+/// VWAP + EMA ///
 vwaplength= input(title="VWAP Length (check off in Style if not needed)", type=integer, defval=1)
 emaSource1= input(title="EMA 100 Source (check off in Style if MTF EMAs 200 is checked)", type=source, defval=close)
 emaLength1= input(title="EMA 100 Length", type=integer, defval=100)
@@ -85,7 +90,6 @@ Check3 = cvwap >= mvwap
 Cross = Check1 and Check2
 Crossup = Cross and Check3
 
-// <-- these are hidden lines
 //Buy = Crossup and rsi(close,14)
 //Risky = Crossup and rsi(close,14) > rsilimit
 //BuyDip = Crossup and rsi(close,14) < rsiminimum
@@ -108,7 +112,6 @@ Crossup = Cross and Check3
 //plotshape(Risky, title= "Risky", location=location.abovebar, color=red, transp=100, style=shape.triangledown, text="")
 //plotshape(BuyDip, title= "WAIT", location=location.abovebar, color=orange, transp=100, style=shape.triangledown, text="")
 //plotshape(GreatBuy, title= "Enter Here", location=location.belowbar, color=green, transp=100, style=shape.triangleup, text="")
-
 plot(ema(emaSource1, emaLength1), color=#a3a3a3, linewidth=1, transp=0, title='EMA100')
 plot(ema(emaSource2, emaLength2), color=#f0f0f0, linewidth=1, transp=0, title='EMA200')
 
@@ -154,7 +157,7 @@ ma_offset1 = input(title="Offset1", type=integer, defval=0)
 res1 = input(title="Resolution (1m?)", type=resolution, defval="240")
 htf_ma1 = ema(src100, ma_len1)
 out1 = security(tickerid, res1, htf_ma1)
-plot(out1, color=#00C3FF, offset=ma_offset1)
+plot(out1, color=#00c1f8, offset=ma_offset1)
 
 ma_len2 = input(title="Length2", type=integer, defval=200)
 src200 = input(title="Source2", type=source, defval=close)
@@ -162,7 +165,7 @@ ma_offset2 = input(title="Offset2", type=integer, defval=0)
 res2 = input(title="Resolution (5m?)", type=resolution, defval="240")
 htf_ma2 = ema(src200, ma_len2)
 out2 = security(tickerid, res2, htf_ma2)
-plot(out2, color=#00C3FF, offset=ma_offset2)
+plot(out2, color=#00c1f8, offset=ma_offset2)
 
 ma_len3 = input(title="Length3", type=integer, defval=200)
 src300 = input(title="Source3", type=source, defval=close)
@@ -170,7 +173,7 @@ ma_offset3 = input(title="Offset3", type=integer, defval=0)
 res3 = input(title="Resolution (15m?)", type=resolution, defval="240")
 htf_ma3 = ema(src300, ma_len3)
 out3 = security(tickerid, res3, htf_ma3)
-plot(out3, color=#FF6060, offset=ma_offset3)
+plot(out3, color=#f86c00, offset=ma_offset3)
 
 ma_len4 = input(title="Length4", type=integer, defval=200)
 src400 = input(title="Source4", type=source, defval=close)
@@ -178,7 +181,7 @@ ma_offset4 = input(title="Offset4", type=integer, defval=0)
 res4 = input(title="Resolution (30m?)", type=resolution, defval="240")
 htf_ma4 = ema(src400, ma_len4)
 out4 = security(tickerid, res4, htf_ma4)
-plot(out4, color=#00C3FF, linewidth=0.5, offset=ma_offset4)
+plot(out4, color=#f86c00, offset=ma_offset4)
 
 ma_len5 = input(title="Length5", type=integer, defval=200)
 src500 = input(title="Source5", type=source, defval=close)
@@ -194,7 +197,7 @@ ma_offset6 = input(title="Offset6", type=integer, defval=0)
 res6 = input(title="Resolution (2h?)", type=resolution, defval="240")
 htf_ma6 = ema(src600, ma_len6)
 out6 = security(tickerid, res6, htf_ma6)
-plot(out6, color=#626262, offset=ma_offset6)
+plot(out6, color=#626262, linewidth=2, offset=ma_offset6)
 
 ma_len7 = input(title="Length7", type=integer, defval=200)
 src700 = input(title="Source7", type=source, defval=close)
@@ -203,6 +206,7 @@ res7 = input(title="Resolution (4h?)", type=resolution, defval="240")
 htf_ma7 = ema(src700, ma_len7)
 out7 = security(tickerid, res7, htf_ma7)
 plot(out7, color=#626262, linewidth=4, offset=ma_offset7)
+
 
 ma_len8 = input(title="Length8", type=integer, defval=200)
 src800 = input(title="Source8", type=source, defval=close)
