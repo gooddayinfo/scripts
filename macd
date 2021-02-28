@@ -30,4 +30,3 @@ plot(hist, title="Histogram", style=plot.style_columns, color=(hist>=0 ? (hist[1
 plot(macd, title="MACD", color=col_macd, transp=0)
 plot(signal, title="Signal", color=col_signal, transp=0)
 plot(cross(signal, macd) ? signal : na, color = #ffffff, style = plot.style_circles, linewidth = 4, transp=30)
-
