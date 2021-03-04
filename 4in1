@@ -140,29 +140,28 @@ plot(ema(emaSource2, emaLength2), color=#f0f0f0, linewidth=1, transp=0, title='E
 //Barcolor
 //barcolor(Long == 1 ? green : red, title = "Bar Color")
 
+
+
+
 // Cloud
-displacement_A = 26
-displacement_B = 26
-conversion_len = 9
-base_line_len = 26
-senkou_B_len = 51
-
-f(x) =>
-    total_volume = sum(volume, x)
-    volume_weighted_high = sum(high*volume, x)/total_volume
-    volume_weighted_low = sum(low*volume, x)/total_volume
-    (volume_weighted_high + volume_weighted_low)/2
-    
-conversion_line = f(conversion_len)
-base_line = f(base_line_len)
-senkou_A = (conversion_line + base_line)/2
-senkou_B = f(senkou_B_len)
-
-
-p1 = plot(senkou_A, offset = displacement_A, color = green, title = "Senkou A", linewidth = 2, transp = 100)
-p2 = plot(senkou_B, offset = displacement_B, color = red, title = "Senkou B", linewidth = 2, transp = 100)
-fill(p1, p2 , color = senkou_A > senkou_B ? green : red, transp= 73, title="Ichimoku Cloud")
-
+conversionPeriods = input(9, minval=1, title="Ichimoku - Conversion Line Periods")
+basePeriods = input(26, minval=1, title="Ichimoku - Base Line Periods")
+laggingSpan2Periods = input(52, minval=1, title="Ichimoku - Lagging Span 2 Periods")
+displacement = input(26, minval=1, title="Ichimoku - Displacement")
+donchian(len) => avg(lowest(len), highest(len))
+conversionLine = donchian(conversionPeriods)
+baseLine = donchian(basePeriods)
+leadLine1 = avg(conversionLine, baseLine)
+leadLine2 = donchian(laggingSpan2Periods)
+plot(conversionLine, color=#0496ff, title="Ichimoku - Conversion Line")
+plot(baseLine, color=#ffffff, title="Ichimoku - Base Line")
+plot(close, offset = -displacement + 1, color=#459915, title="Ichimoku - Lagging Span")
+p1 = plot(leadLine1, offset = displacement - 1, color=#ffffff,
+	 title="Ichimoku - Lead 1 (Senkou A)")
+p2 = plot(leadLine2, offset = displacement - 1, color=#737373,
+	 title="Ichimoku - Lead 2 (Senkou B)")
+fill(p1, p2, color = leadLine1 > leadLine2 ? #ffffff : #737373,
+    title="Ichimoku Cloud")
 
 
 
