@@ -172,16 +172,16 @@ fill(p1, p2 , color = senkou_A > senkou_B ? green : red, transp= 73, title="Ichi
 
 // EMA RIBBON
 
-src1 = close, len1 = input(08, minval=1, title="EMA Ribbon Length")
-src2 = close, len2 = input(14, minval=1, title="EMA Ribbon Length")
-src3 = close, len3 = input(20, minval=1, title="EMA Ribbon Length")
-src4 = close, len4 = input(26, minval=1, title="EMA Ribbon Length")
-src5 = close, len5 = input(32, minval=1, title="EMA Ribbon Length")
-src6 = close, len6 = input(38, minval=1, title="EMA Ribbon Length")
-src7 = close, len7 = input(44, minval=1, title="EMA Ribbon Length")
-src8 = close, len8 = input(50, minval=1, title="EMA Ribbon Length")
+src1 = close, len1 = input(08, minval=1, title="EMA Ribbon Length 1")
+src2 = close, len2 = input(14, minval=1, title="EMA Ribbon Length 2")
+src3 = close, len3 = input(20, minval=1, title="EMA Ribbon Length 3")
+src4 = close, len4 = input(26, minval=1, title="EMA Ribbon Length 4")
+src5 = close, len5 = input(32, minval=1, title="EMA Ribbon Length 5")
+src6 = close, len6 = input(38, minval=1, title="EMA Ribbon Length 6")
+src7 = close, len7 = input(44, minval=1, title="EMA Ribbon Length 7")
+src8 = close, len8 = input(50, minval=1, title="EMA Ribbon Length 8")
 
-src0 = close, len0 = input(60, minval=1, title="EMA Length")
+src0 = close, len0 = input(60, minval=1, title="EMA Length 9")
 
 ema1 = ema(src1, len1)
 ema2 = ema(src2, len2)
