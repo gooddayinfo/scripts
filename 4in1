@@ -1,62 +1,81 @@
-// EMA RIBBON
 study(title = "EMA Ribbon + VWAP + MTF", shorttitle="EMAs + VWAP + Cloud", overlay=true)
 
-src1 = close, len1 = input(08, minval=1, title="EMA Length")
-src2 = close, len2 = input(14, minval=1, title="EMA Length")
-src3 = close, len3 = input(20, minval=1, title="EMA Length")
-src4 = close, len4 = input(26, minval=1, title="EMA Length")
-src5 = close, len5 = input(32, minval=1, title="EMA Length")
-src6 = close, len6 = input(38, minval=1, title="EMA Length")
-src7 = close, len7 = input(44, minval=1, title="EMA Length")
-src8 = close, len8 = input(50, minval=1, title="EMA Length")
+// EMA 200 MULTIPLE-TF
 
-src0 = close, len0 = input(60, minval=1, title="EMA Length")
+//default moving average period is 4H because '4h' is missing in the resolution drop down list
 
-ema1 = ema(src1, len1)
-ema2 = ema(src2, len2)
-ema3 = ema(src3, len3)
-ema4 = ema(src4, len4)
-ema5 = ema(src5, len5)
-ema6 = ema(src6, len6)
-ema7 = ema(src7, len7)
-ema8 = ema(src8, len8)
+ma_len1 = input(title="Length1 (MULTIPLE TFs EMAs 200 STARTS HERE)", type=integer, defval=200)
+src100 = input(title="Source1", type=source, defval=close)
+ma_offset1 = input(title="Offset1", type=integer, defval=0)
+res1 = input(title="Resolution (1m?)", type=resolution, defval="240")
+htf_ma1 = ema(src100, ma_len1)
+out1 = security(tickerid, res1, htf_ma1)
+plot(out1, color=#00c1f8, offset=ma_offset1, title="1m?")
 
-ema0 = ema(src0, len0)
+ma_len2 = input(title="Length2", type=integer, defval=200)
+src200 = input(title="Source2", type=source, defval=close)
+ma_offset2 = input(title="Offset2", type=integer, defval=0)
+res2 = input(title="Resolution (5m?)", type=resolution, defval="240")
+htf_ma2 = ema(src200, ma_len2)
+out2 = security(tickerid, res2, htf_ma2)
+plot(out2, color=#00c1f8, offset=ma_offset2, title="5m?")
 
-//ema is smoothed to 2 periods, you can change smoothing by adjusting the number in the bracket below
-//example [1] would react quicker and [3] would increase smoothing
+ma_len3 = input(title="Length3", type=integer, defval=200)
+src300 = input(title="Source3", type=source, defval=close)
+ma_offset3 = input(title="Offset3", type=integer, defval=0)
+res3 = input(title="Resolution (15m?)", type=resolution, defval="240")
+htf_ma3 = ema(src300, ma_len3)
+out3 = security(tickerid, res3, htf_ma3)
+plot(out3, color=#f86c00, offset=ma_offset3, title="15m?")
 
-plot_color1 = ema1 >= ema1[2]  ? #4985E7 : ema1 < ema1[2] ? #4985E6 : na
-plot_color2 = ema2 >= ema2[2]  ? #4985E7 : ema2 < ema2[2] ? #4985E6 : na
-plot_color3 = ema3 >= ema3[2]  ? #4985E7 : ema3 < ema3[2] ? #4985E6 : na
-plot_color4 = ema4 >= ema4[2]  ? #4985E7 : ema4 < ema4[2] ? #4985E6 : na
-plot_color5 = ema5 >= ema5[2]  ? #4985E7 : ema5 < ema5[2] ? #4985E6 : na
-plot_color6 = ema6 >= ema6[2]  ? #4985E7 : ema6 < ema6[2] ? #4985E6 : na
-plot_color7 = ema7 >= ema7[2]  ? #4985E7 : ema7 < ema7[2] ? #4985E6 : na
-plot_color8 = ema8 >= ema8[2]  ? #4985E7 : ema8 < ema8[2] ? #4985E6 : na
+ma_len4 = input(title="Length4", type=integer, defval=200)
+src400 = input(title="Source4", type=source, defval=close)
+ma_offset4 = input(title="Offset4", type=integer, defval=0)
+res4 = input(title="Resolution (30m?)", type=resolution, defval="240")
+htf_ma4 = ema(src400, ma_len4)
+out4 = security(tickerid, res4, htf_ma4)
+plot(out4, color=#f86c00, offset=ma_offset4, title="30m?")
 
-plot_color0 = ema0 >= ema0[2]  ? lime: ema0 < ema0[2] ? red : na
+ma_len5 = input(title="Length5", type=integer, defval=200)
+src500 = input(title="Source5", type=source, defval=close)
+ma_offset5 = input(title="Offset5", type=integer, defval=0)
+res5 = input(title="Resolution (1h?)", type=resolution, defval="240")
+htf_ma5 = ema(src500, ma_len5)
+out5 = security(tickerid, res5, htf_ma5)
+plot(out5, color=#5E5E5E, offset=ma_offset5, title="1h?")
+
+ma_len6 = input(title="Length6", type=integer, defval=200)
+src600 = input(title="Source6", type=source, defval=close)
+ma_offset6 = input(title="Offset6", type=integer, defval=0)
+res6 = input(title="Resolution (2h?)", type=resolution, defval="240")
+htf_ma6 = ema(src600, ma_len6)
+out6 = security(tickerid, res6, htf_ma6)
+plot(out6, color=#626262, linewidth=2, offset=ma_offset6, title="2h?")
+
+ma_len7 = input(title="Length7", type=integer, defval=200)
+src700 = input(title="Source7", type=source, defval=close)
+ma_offset7 = input(title="Offset7", type=integer, defval=0)
+res7 = input(title="Resolution (4h?)", type=resolution, defval="240")
+htf_ma7 = ema(src700, ma_len7)
+out7 = security(tickerid, res7, htf_ma7)
+plot(out7, color=#626262, linewidth=4, offset=ma_offset7, title="4h?")
 
 
+ma_len8 = input(title="Length8", type=integer, defval=200)
+src800 = input(title="Source8", type=source, defval=close)
+ma_offset8 = input(title="Offset8", type=integer, defval=0)
+res8 = input(title="Resolution (1D?)", type=resolution, defval="240")
+htf_ma8 = ema(src800, ma_len8)
+out8 = security(tickerid, res8, htf_ma8)
+plot(out8, color=#5CFF3C, linewidth=3, offset=ma_offset8, title="D?")
 
-plot(ema1, title="EMA Plot", style=line, linewidth=1, color = plot_color1)
-plot(ema2, title="EMA Plot", style=line, linewidth=1, color = plot_color2)
-plot(ema3, title="EMA Plot", style=line, linewidth=1, color = plot_color3)
-plot(ema4, title="EMA Plot", style=line, linewidth=1, color = plot_color4)
-plot(ema5, title="EMA Plot", style=line, linewidth=1, color = plot_color5)
-plot(ema6, title="EMA Plot", style=line, linewidth=1, color = plot_color6)
-plot(ema7, title="EMA Plot", style=line, linewidth=1, color = plot_color7)
-plot(ema8, title="EMA Plot", style=line, linewidth=1, color = plot_color8)
-
-plot(ema0, title="EMA Plot", style=line, linewidth=3, color = plot_color0)
-
-
-
-
-
-
-
-
+ma_len9 = input(title="Length9", type=integer, defval=200)
+src900 = input(title="Source9", type=source, defval=close)
+ma_offset9 = input(title="Offset9", type=integer, defval=0)
+res9 = input(title="Resolution (1W?)", type=resolution, defval="240")
+htf_ma9 = ema(src900, ma_len9)
+out9 = security(tickerid, res9, htf_ma9)
+plot(out9, color=#00f85f, linewidth=4, offset=ma_offset9, title="W?")
 
 
 /// VWAP + EMA ///
@@ -112,8 +131,8 @@ Crossup = Cross and Check3
 //plotshape(Risky, title= "Risky", location=location.abovebar, color=red, transp=100, style=shape.triangledown, text="")
 //plotshape(BuyDip, title= "WAIT", location=location.abovebar, color=orange, transp=100, style=shape.triangledown, text="")
 //plotshape(GreatBuy, title= "Enter Here", location=location.belowbar, color=green, transp=100, style=shape.triangleup, text="")
-plot(ema(emaSource1, emaLength1), color=#a3a3a3, linewidth=1, transp=0, title='EMA100')
-plot(ema(emaSource2, emaLength2), color=#f0f0f0, linewidth=1, transp=0, title='EMA200')
+plot(ema(emaSource1, emaLength1), color=#a3a3a3, linewidth=1, transp=0, title='EMA 100')
+plot(ema(emaSource2, emaLength2), color=#f0f0f0, linewidth=1, transp=0, title='EMA 200')
 
 // Alerts
 //alertcondition(Longtrigger, title="Long Alert", message="Long Alert")
@@ -122,108 +141,82 @@ plot(ema(emaSource2, emaLength2), color=#f0f0f0, linewidth=1, transp=0, title='E
 //barcolor(Long == 1 ? green : red, title = "Bar Color")
 
 // Cloud
-conversionPeriods = input(9, minval=1, title="Ichimoku - Conversion Line Periods")
-basePeriods = input(26, minval=1, title="Ichimoku - Base Line Periods")
-laggingSpan2Periods = input(52, minval=1, title="Ichimoku - Lagging Span 2 Periods")
-displacement = input(26, minval=1, title="Ichimoku - Displacement")
-donchian(len) => avg(lowest(len), highest(len))
-conversionLine = donchian(conversionPeriods)
-baseLine = donchian(basePeriods)
-leadLine1 = avg(conversionLine, baseLine)
-leadLine2 = donchian(laggingSpan2Periods)
-plot(conversionLine, color=#0496ff, title="Ichimoku - Conversion Line")
-plot(baseLine, color=#ffffff, title="Ichimoku - Base Line")
-plot(close, offset = -displacement + 1, color=#459915, title="Ichimoku - Lagging Span")
-p1 = plot(leadLine1, offset = displacement - 1, color=#ffffff,
-	 title="Ichimoku - Lead 1")
-p2 = plot(leadLine2, offset = displacement - 1, color=#737373,
-	 title="Ichimoku - Lead 2")
-fill(p1, p2, color = leadLine1 > leadLine2 ? #ffffff : #737373,
-    title="Ichimoku Cloud")
+displacement_A = 26
+displacement_B = 26
+conversion_len = 9
+base_line_len = 26
+senkou_B_len = 51
+
+f(x) =>
+    total_volume = sum(volume, x)
+    volume_weighted_high = sum(high*volume, x)/total_volume
+    volume_weighted_low = sum(low*volume, x)/total_volume
+    (volume_weighted_high + volume_weighted_low)/2
+    
+conversion_line = f(conversion_len)
+base_line = f(base_line_len)
+senkou_A = (conversion_line + base_line)/2
+senkou_B = f(senkou_B_len)
+
+
+p1 = plot(senkou_A, offset = displacement_A, color = green, title = "Senkou A", linewidth = 2, transp = 100)
+p2 = plot(senkou_B, offset = displacement_B, color = red, title = "Senkou B", linewidth = 2, transp = 100)
+fill(p1, p2 , color = senkou_A > senkou_B ? green : red, transp= 73, title="Ichimoku Cloud")
 
 
 
-// EMA 200 MULTIPLE-TF
 
-//default moving average period is 4H because '4h' is missing in the resolution drop down list
 
-ma_len1 = input(title="EMA 200 Length1 (MULTIPLE TFs EMAs 200 STARTS HERE)", type=integer, defval=200)
-src100 = input(title="EMA 200 Source1", type=source, defval=close)
-ma_offset1 = input(title="EMA 200 Offset1", type=integer, defval=0)
-res1 = input(title="EMA 200 Resolution (1m?)", type=resolution, defval="240")
-htf_ma1 = ema(src100, ma_len1)
-out1 = security(tickerid, res1, htf_ma1)
-plot(out1, color=#00c1f8, offset=ma_offset1,
-	 title="EMA 200 - 1m?")
 
-ma_len2 = input(title="EMA 200 Length2", type=integer, defval=200)
-src200 = input(title="EMA 200 Source2", type=source, defval=close)
-ma_offset2 = input(title="EMA 200 Offset2", type=integer, defval=0)
-res2 = input(title="EMA 200 Resolution (5m?)", type=resolution, defval="240")
-htf_ma2 = ema(src200, ma_len2)
-out2 = security(tickerid, res2, htf_ma2)
-plot(out2, color=#00c1f8, offset=ma_offset2,
-	 title="EMA 200 - 5m?")
 
-ma_len3 = input(title="EMA 200 Length3", type=integer, defval=200)
-src300 = input(title="EMA 200 Source3", type=source, defval=close)
-ma_offset3 = input(title="EMA 200 Offset3", type=integer, defval=0)
-res3 = input(title="EMA 200 Resolution (15m?)", type=resolution, defval="240")
-htf_ma3 = ema(src300, ma_len3)
-out3 = security(tickerid, res3, htf_ma3)
-plot(out3, color=#f86c00, offset=ma_offset3,
-	 title="EMA 200 - 15m?")
 
-ma_len4 = input(title="EMA 200 Length4", type=integer, defval=200)
-src400 = input(title="EMA 200 Source4", type=source, defval=close)
-ma_offset4 = input(title="EMA 200 Offset4", type=integer, defval=0)
-res4 = input(title="EMA 200 Resolution (30m?)", type=resolution, defval="240")
-htf_ma4 = ema(src400, ma_len4)
-out4 = security(tickerid, res4, htf_ma4)
-plot(out4, color=#f86c00, offset=ma_offset4,
-	 title="EMA 200 - 30m?")
+// EMA RIBBON
 
-ma_len5 = input(title="EMA 200 Length5", type=integer, defval=200)
-src500 = input(title="EMA 200 Source5", type=source, defval=close)
-ma_offset5 = input(title="EMA 200 Offset5", type=integer, defval=0)
-res5 = input(title="EMA 200 Resolution (1h?)", type=resolution, defval="240")
-htf_ma5 = ema(src500, ma_len5)
-out5 = security(tickerid, res5, htf_ma5)
-plot(out5, color=#5E5E5E, offset=ma_offset5,
-	 title="EMA 200 - 1h?")
+src1 = close, len1 = input(08, minval=1, title="EMA Ribbon Length")
+src2 = close, len2 = input(14, minval=1, title="EMA Ribbon Length")
+src3 = close, len3 = input(20, minval=1, title="EMA Ribbon Length")
+src4 = close, len4 = input(26, minval=1, title="EMA Ribbon Length")
+src5 = close, len5 = input(32, minval=1, title="EMA Ribbon Length")
+src6 = close, len6 = input(38, minval=1, title="EMA Ribbon Length")
+src7 = close, len7 = input(44, minval=1, title="EMA Ribbon Length")
+src8 = close, len8 = input(50, minval=1, title="EMA Ribbon Length")
 
-ma_len6 = input(title="EMA 200 Length6", type=integer, defval=200)
-src600 = input(title="EMA 200 Source6", type=source, defval=close)
-ma_offset6 = input(title="EMA 200 Offset6", type=integer, defval=0)
-res6 = input(title="EMA 200 Resolution (2h?)", type=resolution, defval="240")
-htf_ma6 = ema(src600, ma_len6)
-out6 = security(tickerid, res6, htf_ma6)
-plot(out6, color=#626262, linewidth=2, offset=ma_offset6,
-	 title="EMA 200 - 2h?")
+src0 = close, len0 = input(60, minval=1, title="EMA Length")
 
-ma_len7 = input(title="EMA 200 Length7", type=integer, defval=200)
-src700 = input(title="EMA 200 Source7", type=source, defval=close)
-ma_offset7 = input(title="EMA 200 Offset7", type=integer, defval=0)
-res7 = input(title="EMA 200 Resolution (4h?)", type=resolution, defval="240")
-htf_ma7 = ema(src700, ma_len7)
-out7 = security(tickerid, res7, htf_ma7)
-plot(out7, color=#626262, linewidth=4, offset=ma_offset7,
-	 title="EMA 200 - 4h?")
+ema1 = ema(src1, len1)
+ema2 = ema(src2, len2)
+ema3 = ema(src3, len3)
+ema4 = ema(src4, len4)
+ema5 = ema(src5, len5)
+ema6 = ema(src6, len6)
+ema7 = ema(src7, len7)
+ema8 = ema(src8, len8)
 
-ma_len8 = input(title="EMA 200 Length8", type=integer, defval=200)
-src800 = input(title="EMA 200 Source8", type=source, defval=close)
-ma_offset8 = input(title="EMA 200 Offset8", type=integer, defval=0)
-res8 = input(title="EMA 200 Resolution (1D?)", type=resolution, defval="240")
-htf_ma8 = ema(src800, ma_len8)
-out8 = security(tickerid, res8, htf_ma8)
-plot(out8, color=#5CFF3C, linewidth=3, offset=ma_offset8,
-	 title="EMA 200 - D?")
+ema0 = ema(src0, len0)
 
-ma_len9 = input(title="EMA 200 Length9", type=integer, defval=200)
-src900 = input(title="EMA 200 Source9", type=source, defval=close)
-ma_offset9 = input(title="EMA 200 Offset9", type=integer, defval=0)
-res9 = input(title="EMA 200 Resolution (1W?)", type=resolution, defval="240")
-htf_ma9 = ema(src900, ma_len9)
-out9 = security(tickerid, res9, htf_ma9)
-plot(out9, color=#00f85f, linewidth=4, offset=ma_offset9,
-	 title="EMA 200 - W?")
+//ema is smoothed to 2 periods, you can change smoothing by adjusting the number in the bracket below
+//example [1] would react quicker and [3] would increase smoothing
+
+plot_color1 = ema1 >= ema1[2]  ? #4985E7 : ema1 < ema1[2] ? #4985E6 : na
+plot_color2 = ema2 >= ema2[2]  ? #4985E7 : ema2 < ema2[2] ? #4985E6 : na
+plot_color3 = ema3 >= ema3[2]  ? #4985E7 : ema3 < ema3[2] ? #4985E6 : na
+plot_color4 = ema4 >= ema4[2]  ? #4985E7 : ema4 < ema4[2] ? #4985E6 : na
+plot_color5 = ema5 >= ema5[2]  ? #4985E7 : ema5 < ema5[2] ? #4985E6 : na
+plot_color6 = ema6 >= ema6[2]  ? #4985E7 : ema6 < ema6[2] ? #4985E6 : na
+plot_color7 = ema7 >= ema7[2]  ? #4985E7 : ema7 < ema7[2] ? #4985E6 : na
+plot_color8 = ema8 >= ema8[2]  ? #4985E7 : ema8 < ema8[2] ? #4985E6 : na
+
+plot_color0 = ema0 >= ema0[2]  ? lime: ema0 < ema0[2] ? red : na
+
+
+
+plot(ema1, title="EMA Ribbon Plot 1", style=line, linewidth=1, color = plot_color1)
+plot(ema2, title="EMA Ribbon Plot 2", style=line, linewidth=1, color = plot_color2)
+plot(ema3, title="EMA Ribbon Plot 3", style=line, linewidth=1, color = plot_color3)
+plot(ema4, title="EMA Ribbon Plot 4", style=line, linewidth=1, color = plot_color4)
+plot(ema5, title="EMA Ribbon Plot 5", style=line, linewidth=1, color = plot_color5)
+plot(ema6, title="EMA Ribbon Plot 6", style=line, linewidth=1, color = plot_color6)
+plot(ema7, title="EMA Ribbon Plot 7", style=line, linewidth=1, color = plot_color7)
+plot(ema8, title="EMA Ribbon Plot 8", style=line, linewidth=1, color = plot_color8)
+
+plot(ema0, title="EMA Ribbon Plot 9", style=line, linewidth=3, color = plot_color0)
