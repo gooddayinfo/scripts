@@ -37,6 +37,8 @@ hist = macd - signal
 
 
 
+
+
 ///////// BEEP BOOP histogram will range 0 - 0.1
 
 // 🔶beep boop sniplet
@@ -56,8 +58,11 @@ if (hist > 0)
 
     
 // 🔶beep boop sniplet, changed pot style from COLLUMNS to HISTOGRAM
-plot(hist, title="Histogram", style=plot.style_histogram, color=(hist == 0.1 ? ((hist == 0.1) and (close > fastMA) and (open > fastMA) and (low > fastMA) ? col_grow_above : col_fall_above) : ((hist == 0.09) and (close < fastMA) and (open < fastMA) and (high < fastMA)? col_grow_below : col_fall_below) ), transp=0 )
+plot(hist, title="Histogram", style=plot.style_columns, color=(hist == 0.1 ? ((hist == 0.1) and (close > fastMA) and (open > fastMA) and (low > fastMA) ? col_grow_above : col_fall_above) : ((hist == 0.09) and (close < fastMA) and (open < fastMA) and (high < fastMA)? col_grow_below : col_fall_below) ), transp=50 )
 // 🔶end
+
+
+
 
 
 
@@ -73,11 +78,10 @@ plot(hist, title="Histogram", style=plot.style_histogram, color=(hist == 0.1 ? (
 // if above the zero line, the dot will show on the MACD line, which is not going to be visible
 if (macd < 0)
     hist := 0.05
+// if above the zero line, the dot will show on the MACD line, which is not going to be visible
 if (macd > 0)
-    macd := 1
+    macd := -.3
 plot(crossover(macd, signal) ? hist : na, color = #ffffff, style = plot.style_circles, linewidth = 4, transp=0)
-
-
 
 
 
