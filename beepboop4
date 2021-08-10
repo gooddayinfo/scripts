@@ -1,0 +1,83 @@
+//@version=4
+// https://www.patreon.com/posts/improved-beep-be-43750203
+study(title="Beep Boop", shorttitle="Beep Boop", resolution="")
+
+// Getting inputs
+fast_length = input(title="Fast Length", type=input.integer, defval=8)
+slow_length = input(title="Slow Length", type=input.integer, defval=21)
+src = input(title="Source", type=input.source, defval=close)
+signal_length = input(title="Signal Smoothing", type=input.integer, minval = 1, maxval = 50, defval = 5)
+sma_source = input(title="Simple MA(Oscillator)", type=input.bool, defval=false)
+sma_signal = input(title="Simple MA(Signal Line)", type=input.bool, defval=false)
+
+
+
+// 🔶beep boop sniplet
+EMATrend = input(title="EMA Trend", type=input.integer, defval=200)
+col_grow_above = #26A69A
+col_grow_below = #FF0000
+col_fall_above = #000000
+col_fall_below = #000000
+col_macd = #0094ff
+col_signal = #ff6a00
+// 🔶end beep boop sniplet
+
+
+
+// Calculating
+fast_ma = sma_source ? sma(src, fast_length) : ema(src, fast_length)
+slow_ma = sma_source ? sma(src, slow_length) : ema(src, slow_length)
+macd = fast_ma - slow_ma
+signal = sma_signal ? sma(macd, signal_length) : ema(macd, signal_length)
+hist = macd - signal
+
+
+
+
+
+
+
+///////// BEEP BOOP histogram will range 0 - 0.1
+
+// 🔶beep boop sniplet
+if (hist > 0)
+    hist := 0.1
+if (hist < 0)
+    hist := 0.09
+fastMA = ema(close, EMATrend)
+//fastMA = 0
+// 🔶end
+
+
+
+//this sniplet show the historgram line only if price is ABOVE the EMA, currently set as 200 periods in this code
+if (hist > 0)
+    hist := 0.1
+
+    
+// 🔶beep boop sniplet, changed pot style from COLLUMNS to HISTOGRAM
+plot(hist, title="Histogram", style=plot.style_histogram, color=(hist == 0.1 ? ((hist == 0.1) and (close > fastMA) and (open > fastMA) and (low > fastMA) ? col_grow_above : col_fall_above) : ((hist == 0.09) and (close < fastMA) and (open < fastMA) and (high < fastMA)? col_grow_below : col_fall_below) ), transp=0 )
+// 🔶end
+
+
+
+
+
+
+
+////////////////// PLOT DOTS when macd CROSSOVERS signal /////////////////////////
+//the dot will show on the HISTOGRAM "hist" line, with a small range between 0 - 0.1, or if prefer, set it to a differnt value, ie. hist: = [value]
+
+//////// MACD ABOVE SIGNAL
+// if below zero line, the dot will show on the HISTOGRAM "hist" line, in the middle of the range at 0.05 (between 0 - 0.1)
+// if above the zero line, the dot will show on the MACD line, which is not going to be visible
+if (macd < 0)
+    hist := 0.05
+if (macd > 0)
+    macd := 1
+plot(crossover(macd, signal) ? hist : na, color = #ffffff, style = plot.style_circles, linewidth = 4, transp=0)
+
+
+
+
+
