@@ -33,5 +33,5 @@ plot(signal, title="Signal", color=col_signal, transp=0)
 // Plot crossovers
 // If macd above signal, a white dot appears on the macd line
 // If signal above macd, an orange dot appears on the signal line
-plot(crossover(macd, signal) ? macd : na, color = #ffffff, style = plot.style_circles, linewidth = 4, transp=30)
-plot(crossover(signal, macd) ? signal : na, color = #FF7500, style = plot.style_circles, linewidth = 4, transp=30)
+plot(crossover(macd, signal) ? macd : na, color = #ffffff, style = plot.style_circles, linewidth = 4, transp=0)
+plot(crossover(signal, macd) ? signal : na, color = #FF7500, style = plot.style_circles, linewidth = 4, transp=0)
