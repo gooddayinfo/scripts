@@ -32,5 +32,6 @@ if (hist < 0)
 fastMA = ema(close, EMATrend)
 //fastMA = 0
 
-
 plot(hist, title="Histogram", style=plot.style_columns, color=(hist == 0.1 ? ((hist == 0.1) and (close > fastMA) and (open > fastMA) and (low > fastMA) ? col_grow_above : col_fall_above) : ((hist == 0.09) and (close < fastMA) and (open < fastMA) and (high < fastMA)? col_grow_below : col_fall_below) ), transp=0 )
+
+
